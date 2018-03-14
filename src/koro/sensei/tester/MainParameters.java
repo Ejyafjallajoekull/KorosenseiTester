@@ -2,6 +2,7 @@ package koro.sensei.tester;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -15,10 +16,12 @@ public class MainParameters {
 	// command line parameters
 	private static final String LOG_LEVEL = "-log_level";
 	private static final String LOG_FOLDER = "-log_folder";
+	private static final String TESTS = "-test";
 	
 	// variables, which can be set via command line
 	private Level logLevel = Level.FINEST;
 	private String logFolder = null;
+	private ArrayList<String> tests = new ArrayList<String>();
 	
 	/**
 	 * Create a set of command line set parameters from the specified string array.
@@ -36,7 +39,8 @@ public class MainParameters {
 			for (int i = 0; i < arguments.length; i++) {
 				switch (arguments[i]) {
 				
-				case LOG_LEVEL:
+				// set the logging level
+				case MainParameters.LOG_LEVEL:
 					if (i < arguments.length - 1) {
 						int level = Integer.parseInt(arguments[i+1]);
 						switch (level) {
@@ -88,9 +92,22 @@ public class MainParameters {
 					}
 					break;
 					
-				case LOG_FOLDER:
+				// set the logging folder
+				case MainParameters.LOG_FOLDER:
 					if (i < arguments.length - 1) {
 						this.logFolder = arguments[i+1];
+					}
+					break;
+					
+				// define which tests should be run
+				case MainParameters.TESTS:
+					// start at the current argument and iterate further
+					for (int j = i; j < arguments.length; j++) {
+						if (arguments[j] != null && arguments[j].startsWith("-")) {
+							this.tests.add(arguments[j]);
+						} else {
+							break;
+						}
 					}
 					break;
 				
@@ -114,12 +131,22 @@ public class MainParameters {
 
 	/**
 	 * Get the logging level, which has been set via the command line.
-	 * If none has been set, the defaul one will be returned.
+	 * If none has been set, the default one will be returned.
 	 * 
 	 * @return - the logging level
 	 */
 	public Level getLoggingLevel() {
 		return this.logLevel;
+	}
+	
+	/**
+	 * Get the tests to be run. If none has been specified, all tests 
+	 * will be run.
+	 * 
+	 * @return - the tests to run
+	 */
+	public ArrayList<String> getTests() {
+		return this.tests;
 	}
 	
 }

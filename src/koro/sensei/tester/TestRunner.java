@@ -33,13 +33,14 @@ public class TestRunner {
 	/**
 	 * The version number of the testing program.
 	 */
-	public static final String VERSION = "1.0.0.4";
+	public static final String VERSION = "1.0.1.0";
 	
 	/**
 	 * Run the test runner.<br>
 	 * <br>
 	 * <b>Command line parameters:</b><br>
 	 * <br>
+	 * <b>-test</b>: set the tests to be run<br>
 	 * <b>-log_folder</b>: set the logging folder to the specified path<br>
 	 * <b>-log_level</b>: set the logging level of the test runner with the following 
 	 * integer arguments:<br>
@@ -62,6 +63,8 @@ public class TestRunner {
 		Level logLevel = mainParams.getLoggingLevel();
 		LoggingHandler.setLoggingFolder(mainParams.getLogFolderPath());
 		LoggingHandler.setNumberLogFiles(Integer.MAX_VALUE);
+		ArrayList<String> testsToRun = mainParams.getTests();
+		
 		// only start log writing if the level has not been set to a null object
 		if (logLevel != null) {
 			LoggingHandler.getLog().setLevel(logLevel);
@@ -93,7 +96,8 @@ public class TestRunner {
 					try {
 						String classQualifier = classPath.subpath(i, classPath.getNameCount()).toString().replace(File.separatorChar, '.');
 						Class<?> testingClass = Class.forName(classQualifier.substring(0, classQualifier.length()-6));
-						if (!testingClass.isInterface() && TestRunner.isTestSubject(testingClass)) {
+						if (!testingClass.isInterface() && TestRunner.isTestSubject(testingClass) 
+								&& TestRunner.shouldBeTested(testingClass, testsToRun)) {
 							// run all tests for all testing classes present
 							LoggingHandler.getLog().info("Testing class " + testingClass);
 							allTested++;
@@ -153,6 +157,23 @@ public class TestRunner {
 					return true;
 				}
 			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns whether the specified class should be tested given a list of all 
+	 * classes to test. An empty list will result in all classes being tested.
+	 * 
+	 * @param classToTest - the class to check
+	 * @param testsToRun - a list of all classes to be tested
+	 * @return true if the specified class should be tested, false if not
+	 */
+	private static boolean shouldBeTested(Class<?> classToTest, ArrayList<String> testsToRun) {
+		if (classToTest != null && (testsToRun == null 
+				|| testsToRun.contains(classToTest.getSimpleName())
+				|| testsToRun.isEmpty())) {
+			return true;
 		}
 		return false;
 	}
