@@ -103,7 +103,7 @@ public class MainParameters {
 				case MainParameters.TESTS:
 					// start at the current argument and iterate further
 					for (int j = i; j < arguments.length; j++) {
-						if (arguments[j] != null && arguments[j].startsWith("-")) {
+						if (arguments[j] != null && !arguments[j].startsWith("-")) {
 							this.tests.add(arguments[j]);
 						} else {
 							break;
