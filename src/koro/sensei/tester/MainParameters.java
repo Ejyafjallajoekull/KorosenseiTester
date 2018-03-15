@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+import central.logging.functionality.LoggingHandler;
+
 /**
  * The MainParameters class parses command line arguments.
  * 
@@ -41,6 +43,8 @@ public class MainParameters {
 				
 				// set the logging level
 				case MainParameters.LOG_LEVEL:
+					LoggingHandler.getLog().info("Detected command line parameter "
+							+ "for adjusting the logging level.");
 					if (i < arguments.length - 1) {
 						int level = Integer.parseInt(arguments[i+1]);
 						switch (level) {
@@ -89,26 +93,42 @@ public class MainParameters {
 							break;
 							
 						}
+						LoggingHandler.getLog().info(String.format("The logging level "
+								+ "has been set to %s.", this.logLevel));
+					} else {
+						LoggingHandler.getLog().warning("The logging level has not "
+								+ " been specified in the command line.");
 					}
 					break;
 					
 				// set the logging folder
 				case MainParameters.LOG_FOLDER:
+					LoggingHandler.getLog().info("Detected command line parameter "
+							+ "for adjusting the logging folder.");
 					if (i < arguments.length - 1) {
 						this.logFolder = arguments[i+1];
+						LoggingHandler.getLog().info(String.format("The logging folder "
+								+ "has been set to %s.", this.logFolder));
+					} else {
+						LoggingHandler.getLog().warning("The logging folder has not "
+								+ " been specified in the command line.");
 					}
 					break;
 					
 				// define which tests should be run
 				case MainParameters.TESTS:
+					LoggingHandler.getLog().info("Detected command line parameter "
+							+ "for adjusting the tests to run.");
 					// start at the current argument and iterate further
-					for (int j = i; j < arguments.length; j++) {
+					for (int j = i+1; j < arguments.length; j++) {
 						if (arguments[j] != null && !arguments[j].startsWith("-")) {
 							this.tests.add(arguments[j]);
 						} else {
 							break;
 						}
 					}
+					LoggingHandler.getLog().info(String.format("The list of tests to run "
+							+ "has been set to %s.", this.tests));
 					break;
 				
 				default:

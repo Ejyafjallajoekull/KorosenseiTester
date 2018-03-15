@@ -33,7 +33,7 @@ public class TestRunner {
 	/**
 	 * The version number of the testing program.
 	 */
-	public static final String VERSION = "1.0.1.1";
+	public static final String VERSION = "1.0.1.2";
 	
 	/**
 	 * Run the test runner.<br>
@@ -64,7 +64,7 @@ public class TestRunner {
 		LoggingHandler.setLoggingFolder(mainParams.getLogFolderPath());
 		LoggingHandler.setNumberLogFiles(Integer.MAX_VALUE);
 		ArrayList<String> testsToRun = mainParams.getTests();
-		
+
 		// only start log writing if the level has not been set to a null object
 		if (logLevel != null) {
 			LoggingHandler.getLog().setLevel(logLevel);
