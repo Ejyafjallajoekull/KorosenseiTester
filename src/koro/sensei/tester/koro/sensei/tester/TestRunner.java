@@ -1,4 +1,4 @@
-package koro.sensei.tester;
+package koro.sensei.tester.koro.sensei.tester;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,8 +8,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import central.logging.functionality.LoggingFailureException;
-import central.logging.functionality.LoggingHandler;
+import central.logging.central.logging.functionality.LoggingFailureException;
+import central.logging.central.logging.functionality.LoggingHandler;
 
 
 /**
@@ -33,7 +33,7 @@ public class TestRunner {
 	/**
 	 * The version number of the testing program.
 	 */
-	public static final String VERSION = "1.0.1.2";
+	public static final String VERSION = "1.0.1.3";
 	
 	/**
 	 * Run the test runner.<br>
@@ -81,6 +81,7 @@ public class TestRunner {
 		try {
 			// create a list of all class files in the current project, excluding module declarations
 			ArrayList<Path> list = new ArrayList<Path>();
+			LoggingHandler.getLog().fine("Lookup path: " + (new File("")).toPath());
 			Files.find((new File("")).toPath(), Integer.MAX_VALUE, (filePath, fileAttr) -> 
 			filePath.toString().toLowerCase().endsWith(TestRunner.CLASS_EXTENSION) 
 					&& !filePath.endsWith(MODULE_IDENTIFIER + CLASS_EXTENSION)).forEach(list::add);

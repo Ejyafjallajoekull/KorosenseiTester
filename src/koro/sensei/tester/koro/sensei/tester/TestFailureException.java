@@ -1,4 +1,4 @@
-package koro.sensei.tester;
+package koro.sensei.tester.koro.sensei.tester;
 
 /**
  * The TestFailureException will be thrown each time a specific test 
