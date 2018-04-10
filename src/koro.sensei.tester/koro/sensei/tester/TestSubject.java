@@ -1,4 +1,4 @@
-package koro.sensei.tester.koro.sensei.tester.runner;
+package koro.sensei.tester;
 
 
 /**

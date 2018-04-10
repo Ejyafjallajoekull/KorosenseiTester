@@ -1,4 +1,4 @@
-package koro.sensei.tester.koro.sensei.tester.runner;
+package koro.sensei.tester;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,8 +8,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import central.logging.central.logging.functionality.LoggingFailureException;
-import central.logging.central.logging.functionality.LoggingHandler;
+import central.logging.functionality.LoggingFailureException;
+import central.logging.functionality.LoggingHandler;
 
 
 /**
@@ -33,7 +33,7 @@ public class TestRunner {
 	/**
 	 * The version number of the testing program.
 	 */
-	public static final String VERSION = "1.0.1.4";
+	public static final String VERSION = "1.0.1.5";
 	
 	/**
 	 * Run the test runner.<br>

@@ -1,11 +1,11 @@
-package koro.sensei.tester.koro.sensei.tester.runner;
+package koro.sensei.tester;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import central.logging.central.logging.functionality.LoggingHandler;
+import central.logging.functionality.LoggingHandler;
 
 /**
  * The MainParameters class parses command line arguments.
