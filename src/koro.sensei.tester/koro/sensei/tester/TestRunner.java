@@ -33,7 +33,7 @@ public class TestRunner {
 	/**
 	 * The version number of the testing program.
 	 */
-	public static final String VERSION = "1.0.1.5";
+	public static final String VERSION = "1.0.1.6";
 	
 	/**
 	 * Run the test runner.<br>
@@ -93,10 +93,10 @@ public class TestRunner {
 			
 			// test all classes for the TestSubject interface
 			for (Path classPath : list) {
-				for (int i = 0; i <= classPath.getNameCount(); i++) {
+				for (int i = 0; i < classPath.getNameCount(); i++) {
 					try {
 						String classQualifier = classPath.subpath(i, classPath.getNameCount()).toString().replace(File.separatorChar, '.');
-						Class<?> testingClass = Class.forName(classQualifier.substring(0, classQualifier.length()-6));
+						Class<?> testingClass = Class.forName(classQualifier.substring(0, classQualifier.length()-TestRunner.CLASS_EXTENSION.length()));
 						if (!testingClass.isInterface() && TestRunner.isTestSubject(testingClass) 
 								&& TestRunner.shouldBeTested(testingClass, testsToRun)) {
 							// run all tests for all testing classes present
