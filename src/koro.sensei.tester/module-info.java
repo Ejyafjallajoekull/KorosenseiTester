@@ -9,7 +9,7 @@ module koro.sensei.tester {
 	exports koro.sensei.tester;
 
 	requires central.logging;
-	requires transitive java.base;
+	requires java.base;
 	requires transitive java.logging;
 	
 }
