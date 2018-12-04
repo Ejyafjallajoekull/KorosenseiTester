@@ -31,4 +31,12 @@ public interface TestSubject {
 		}
 	}
 	
+//	public static void assertException(TestFunction functionToTest, Class<? extends Exception> exceptionType, String failureMessage, Object ... testFunctionArguments) throws TestFailureException {
+//		if (functionToTest != null) {
+//			
+//		} else {
+//			throw new NullPointerException("");
+//		}
+//	}
+	
 }
