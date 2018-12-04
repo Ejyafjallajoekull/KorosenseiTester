@@ -71,7 +71,7 @@ public class TestRunner {
 			try {
 				LoggingHandler.startLogWriting();
 			} catch (LoggingFailureException e1) {
-				LoggingHandler.getLog().log(Level.WARNING, "Logging could not be started.", e1);
+				LoggingHandler.logAndPrint(Level.WARNING, "Logging could not be started.", e1);
 				e1.printStackTrace();
 			}
 		} else { // disable logging completely
@@ -100,7 +100,7 @@ public class TestRunner {
 						if (!testingClass.isInterface() && TestRunner.isTestSubject(testingClass) 
 								&& TestRunner.shouldBeTested(testingClass, testsToRun)) {
 							// run all tests for all testing classes present
-							LoggingHandler.getLog().info("Testing class " + testingClass);
+							LoggingHandler.logAndPrint(Level.INFO, "Testing class " + testingClass);
 							allTested++;
 							try {
 								testingClass.getMethod("runAllTests").invoke(testingClass.getConstructor().newInstance());
@@ -108,10 +108,10 @@ public class TestRunner {
 							} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException 
 									| InvocationTargetException | InstantiationException e) {
 								if (e.getCause() instanceof TestFailureException) {
-									LoggingHandler.getLog().log(Level.SEVERE, "Some tests of " + testingClass
+									LoggingHandler.logAndPrint(Level.SEVERE, "Some tests of " + testingClass
 											+ " failed.", e);
 								} else {
-									LoggingHandler.getLog().log(Level.SEVERE, "Test class " + testingClass
+									LoggingHandler.logAndPrint(Level.SEVERE, "Test class " + testingClass
 											+ " could not be tested.", e);	
 								}
 							}
@@ -127,18 +127,18 @@ public class TestRunner {
 				}
 			}
 			// print statistics
-			LoggingHandler.getLog().info(String.format("%d/%d tests successful.",
+			LoggingHandler.logAndPrint(Level.INFO, String.format("%d/%d tests successful.",
 					successfullyTested, allTested));
-			LoggingHandler.getLog().info("Finished testing.");
+			LoggingHandler.logAndPrint(Level.INFO, "Finished testing.");
 		} catch (IOException e) {
-			LoggingHandler.getLog().log(Level.SEVERE, "The search for the class "
+			LoggingHandler.logAndPrint(Level.SEVERE, "The search for the class "
 					+ "files did fail.", e);
-			LoggingHandler.getLog().warning("Testing aborted.");
+			LoggingHandler.logAndPrint(Level.WARNING, "Testing aborted.");
 		}
 		try {
 			LoggingHandler.stopLogWriting();
 		} catch (LoggingFailureException e) {
-			LoggingHandler.getLog().log(Level.WARNING, "Logging could not be stopped.", e);
+			LoggingHandler.logAndPrint(Level.WARNING, "Logging could not be stopped.", e);
 			e.printStackTrace();
 		}
 	}
