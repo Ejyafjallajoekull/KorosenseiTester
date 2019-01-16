@@ -1,7 +1,7 @@
 package koro.sensei.tester;
 
 /**
- * The TestFunction interface supports the calling of a singel function to test.
+ * The TestFunction interface supports the calling of a single function to test.
  * 
  * @author Planters
  *
@@ -9,10 +9,12 @@ package koro.sensei.tester;
 public interface TestFunction {
 
 	/**
-	 * Calls the function to test supplying the specified arguments. The arguments can be 
-	 * supplied to use as an anonymous inner class.
+	 * Calls the function to test.
 	 * 
-	 * @param functionArguments - the arguments for the function implementation to use
+	 * <p> The interface is used to execute a function or group of code to test it 
+	 * for specific behaviour, e.g. if a specific exception is thrown.</p>
+	 * 
+	 * @throws Exception if an exception is thrown by the called function
 	 */
 	public void callFunction() throws Exception;
 	

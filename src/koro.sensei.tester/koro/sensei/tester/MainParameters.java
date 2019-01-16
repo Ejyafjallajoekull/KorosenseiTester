@@ -13,7 +13,7 @@ import central.logging.functionality.LoggingHandler;
  * @author Planters
  *
  */
-public class MainParameters {
+class MainParameters {
 
 	// command line parameters
 	private static final String LOG_LEVEL = "-log_level";
